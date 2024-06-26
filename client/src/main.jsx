@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.jsx';
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
-import { ApolloProviderWrapper } from './utils/apolloClient.js';
+import { ApolloProviderWrapper } from './utils/apolloClient.jsx';
 
 const router = createBrowserRouter([
   {
