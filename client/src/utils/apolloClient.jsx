@@ -16,24 +16,9 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-// Define custom merge function
-const cache = new InMemoryCache({
-  typePolicies: {
-    User: {
-      fields: {
-        savedBooks: {
-          merge(existing = [], incoming = []) {
-            return incoming;
-          },
-        },
-      },
-    },
-  },
-});
-
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cache,
+  cache: new InMemoryCache(),
 });
 
 const ApolloProviderWrapper = ({ children }) => {
