@@ -14,8 +14,8 @@ import { REMOVE_BOOK } from '../utils/mutations';
 import { removeBookId } from '../utils/localStorage';
 
 const SavedBooks = () => {
-  const { loading, data, error: queryError } = useQuery(GET_ME);
-  const [removeBook, { error: mutationError }] = useMutation(REMOVE_BOOK);
+  const { loading, data } = useQuery(GET_ME);
+  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
   const [userData, setUserData] = useState({
     savedBooks: [],
@@ -23,7 +23,6 @@ const SavedBooks = () => {
 
   useEffect(() => {
     if (data && data.me) {
-      console.log('Fetched data:', data.me); // Debugging line to check fetched data
       setUserData(data.me);
     }
   }, [data]);
@@ -54,10 +53,6 @@ const SavedBooks = () => {
 
   if (loading) {
     return <h2>LOADING...</h2>;
-  }
-
-  if (queryError) {
-    return <h2>Error loading data!</h2>;
   }
 
   return (
@@ -92,7 +87,7 @@ const SavedBooks = () => {
             );
           })}
         </Row>
-        {mutationError && <div>Error: {mutationError.message}</div>}
+        {error && <div>Error: {error.message}</div>}
       </Container>
     </>
   );
