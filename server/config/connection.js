@@ -5,7 +5,6 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   tls: true,  
-  tlsCAFile: process.env.CA_FILE_PATH,  
 });
 
 const db = mongoose.connection;
