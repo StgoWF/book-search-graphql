@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
@@ -6,6 +7,7 @@ const { authMiddleware } = require('./utils/auth');
 const typeDefs = require('./schemas/typeDefs');
 const resolvers = require('./schemas/resolvers');
 const db = require('./config/connection');
+const cors = require('cors'); 
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -19,6 +21,9 @@ const server = new ApolloServer({
 const startApolloServer = async () => {
   await server.start();
 
+  // Configura CORS
+  app.use(cors());
+
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
@@ -27,10 +32,10 @@ const startApolloServer = async () => {
   }));
 
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/dist')));
+    app.use(express.static(path.join(__dirname, '../client/build')));
 
     app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+      res.sendFile(path.join(__dirname, '../client/build/index.html'));
     });
   }
 
