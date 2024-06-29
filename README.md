@@ -1,5 +1,5 @@
 # Book Search Engine
-
+![License](https://img.shields.io/badge/license-MIT-green)
 ## Description
 
 This project is a Book Search Engine built with the MERN stack. The application allows users to search for books via the Google Books API, save their favorite books, and view their saved books. The application has been refactored to use a GraphQL API built with Apollo Server, replacing the existing RESTful API.
